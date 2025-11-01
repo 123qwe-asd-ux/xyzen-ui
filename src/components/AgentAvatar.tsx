@@ -19,12 +19,6 @@ export const AgentAvatar: React.FC<AgentAvatarProps> = ({
   size = 'medium',
   className = '',
 }) => {
-  const sizeClasses = {
-    small: 'avatar-small',
-    medium: 'avatar-medium',
-    large: 'avatar-large',
-  };
-
   const statusColors = {
     active: '#4ade80',
     idle: '#94a3b8',
@@ -85,7 +79,7 @@ export const AgentAvatar: React.FC<AgentAvatarProps> = ({
   };
 
   return (
-    <div style={containerStyle} className={`agent-avatar ${sizeClasses[size]} ${className}`}>
+    <div style={containerStyle} className={`agent-avatar ${className}`}>
       {avatar ? (
         <img src={avatar} alt={name} style={imgStyle} />
       ) : (

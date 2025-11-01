@@ -115,6 +115,13 @@ export const AgentChat: React.FC<AgentChatProps> = ({
     transition: 'background-color 0.2s',
   };
 
+  const buttonDisabledStyle: React.CSSProperties = {
+    ...buttonStyle,
+    backgroundColor: '#94a3b8',
+    cursor: 'not-allowed',
+    opacity: 0.6,
+  };
+
   const handleSend = () => {
     if (inputValue.trim() && onSendMessage) {
       onSendMessage(inputValue.trim());
@@ -170,17 +177,14 @@ export const AgentChat: React.FC<AgentChatProps> = ({
           onKeyPress={handleKeyPress}
           placeholder="Type a message..."
           style={inputStyle}
+          aria-label="Message input"
+          aria-describedby="chat-input-description"
         />
         <button
           onClick={handleSend}
           disabled={!inputValue.trim()}
-          style={buttonStyle}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#2563eb';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#3b82f6';
-          }}
+          style={inputValue.trim() ? buttonStyle : buttonDisabledStyle}
+          aria-label="Send message"
         >
           Send
         </button>

@@ -77,7 +77,7 @@ export const App: React.FC = () => {
 
   const handleSendMessage = (content: string) => {
     const newMessage: ChatMessage = {
-      id: Date.now().toString(),
+      id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       content,
       timestamp: new Date(),
       role: 'user',
@@ -87,7 +87,7 @@ export const App: React.FC = () => {
     // Simulate agent response
     setTimeout(() => {
       const agentResponse: ChatMessage = {
-        id: (Date.now() + 1).toString(),
+        id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         agentId: selectedAgent.id,
         content: 'This is a simulated response from the AI agent.',
         timestamp: new Date(),
