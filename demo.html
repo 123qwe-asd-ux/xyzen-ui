@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xyzen UI - Component Library Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .demo-avatars {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .demo-statuses {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* Agent Avatar Styles */
+        .avatar {
+            position: relative;
+            display: inline-block;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #e2e8f0;
+        }
+
+        .avatar-small { width: 32px; height: 32px; }
+        .avatar-medium { width: 48px; height: 48px; }
+        .avatar-large { width: 64px; height: 64px; }
+
+        .avatar-initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-weight: bold;
+            color: #475569;
+        }
+
+        .avatar-small .avatar-initials { font-size: 12px; }
+        .avatar-medium .avatar-initials { font-size: 16px; }
+        .avatar-large .avatar-initials { font-size: 24px; }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .avatar-small .status-indicator { width: 8px; height: 8px; }
+        .avatar-medium .status-indicator { width: 12px; height: 12px; }
+        .avatar-large .status-indicator { width: 16px; height: 16px; }
+
+        .status-active { background-color: #4ade80; }
+        .status-idle { background-color: #94a3b8; }
+        .status-processing { background-color: #fbbf24; }
+        .status-offline { background-color: #64748b; }
+        .status-error { background-color: #ef4444; }
+
+        /* Agent Status Component */
+        .agent-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .status-icon {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .status-label {
+            color: #334155;
+            font-weight: 500;
+        }
+
+        /* Agent Card */
+        .agent-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            background: white;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .agent-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .card-capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .capability-tag {
+            padding: 4px 8px;
+            background-color: #f1f5f9;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .card-last-active {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+
+        .code {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #1e293b;
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+
+        .install-cmd {
+            background-color: #1e293b;
+            color: #4ade80;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Xyzen UI Component Library</h1>
+        <p class="subtitle">Modern React components for displaying AI agents on the web</p>
+
+        <div class="section">
+            <h2>Installation</h2>
+            <div class="install-cmd">npm install xyzen-ui react react-dom</div>
+        </div>
+
+        <div class="section">
+            <h2>Agent Avatars</h2>
+            <p>Display agent avatars with status indicators in three sizes.</p>
+            <div class="demo-avatars">
+                <div class="avatar avatar-small">
+                    <div class="avatar-initials">AI</div>
+                    <div class="status-indicator status-active"></div>
+                </div>
+                <div class="avatar avatar-medium">
+                    <div class="avatar-initials">CH</div>
+                    <div class="status-indicator status-processing"></div>
+                </div>
+                <div class="avatar avatar-large">
+                    <div class="avatar-initials">DA</div>
+                    <div class="status-indicator status-idle"></div>
+                </div>
+            </div>
+            <div class="code">&lt;AgentAvatar name="AI Agent" status="active" size="medium" /&gt;</div>
+        </div>
+
+        <div class="section">
+            <h2>Agent Status Indicators</h2>
+            <p>Visual indicators for different agent states.</p>
+            <div class="demo-statuses">
+                <div class="agent-status">
+                    <span class="status-icon" style="color: #4ade80;">●</span>
+                    <span class="status-label">Active</span>
+                </div>
+                <div class="agent-status">
+                    <span class="status-icon" style="color: #94a3b8;">○</span>
+                    <span class="status-label">Idle</span>
+                </div>
+                <div class="agent-status">
+                    <span class="status-icon" style="color: #fbbf24;">◐</span>
+                    <span class="status-label">Processing</span>
+                </div>
+                <div class="agent-status">
+                    <span class="status-icon" style="color: #64748b;">○</span>
+                    <span class="status-label">Offline</span>
+                </div>
+                <div class="agent-status">
+                    <span class="status-icon" style="color: #ef4444;">⚠</span>
+                    <span class="status-label">Error</span>
+                </div>
+            </div>
+            <div class="code">&lt;AgentStatus status="active" showLabel={true} /&gt;</div>
+        </div>
+
+        <div class="section">
+            <h2>Agent Cards</h2>
+            <p>Display detailed information about AI agents.</p>
+            <div class="demo-grid">
+                <div class="agent-card">
+                    <div class="card-header">
+                        <div class="avatar avatar-medium">
+                            <div class="avatar-initials">AA</div>
+                            <div class="status-indicator status-active"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-name">Assistant AI</div>
+                            <div class="agent-status">
+                                <span class="status-icon" style="color: #4ade80;">●</span>
+                                <span class="status-label">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-description">General-purpose AI assistant that can help with various tasks</p>
+                    <div class="card-capabilities">
+                        <span class="capability-tag">Text Generation</span>
+                        <span class="capability-tag">Code Writing</span>
+                        <span class="capability-tag">Analysis</span>
+                    </div>
+                    <div class="card-last-active">Last active: 5m ago</div>
+                </div>
+
+                <div class="agent-card">
+                    <div class="card-header">
+                        <div class="avatar avatar-medium">
+                            <div class="avatar-initials">CH</div>
+                            <div class="status-indicator status-processing"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-name">Code Helper</div>
+                            <div class="agent-status">
+                                <span class="status-icon" style="color: #fbbf24;">◐</span>
+                                <span class="status-label">Processing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-description">Specialized AI for coding tasks and technical support</p>
+                    <div class="card-capabilities">
+                        <span class="capability-tag">Code Review</span>
+                        <span class="capability-tag">Debugging</span>
+                        <span class="capability-tag">Documentation</span>
+                    </div>
+                    <div class="card-last-active">Last active: 1m ago</div>
+                </div>
+
+                <div class="agent-card">
+                    <div class="card-header">
+                        <div class="avatar avatar-medium">
+                            <div class="avatar-initials">DA</div>
+                            <div class="status-indicator status-idle"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-name">Data Analyst</div>
+                            <div class="agent-status">
+                                <span class="status-icon" style="color: #94a3b8;">○</span>
+                                <span class="status-label">Idle</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-description">AI agent focused on data analysis and insights</p>
+                    <div class="card-capabilities">
+                        <span class="capability-tag">Data Processing</span>
+                        <span class="capability-tag">Visualization</span>
+                        <span class="capability-tag">Reporting</span>
+                    </div>
+                    <div class="card-last-active">Last active: 1h ago</div>
+                </div>
+            </div>
+            <div class="code">&lt;AgentCard agent={agent} onClick={(agent) => console.log(agent)} /&gt;</div>
+        </div>
+
+        <div class="section">
+            <h2>Features</h2>
+            <ul style="list-style-position: inside; color: #475569; line-height: 1.8;">
+                <li>🎨 <strong>Modern Design</strong> - Clean, professional UI components</li>
+                <li>📱 <strong>Responsive</strong> - Works on all screen sizes</li>
+                <li>⚡ <strong>TypeScript</strong> - Full type safety and autocomplete</li>
+                <li>🔧 <strong>Customizable</strong> - Easy to style and extend</li>
+                <li>♿ <strong>Accessible</strong> - ARIA labels and keyboard navigation</li>
+                <li>📦 <strong>Zero Dependencies</strong> - Only requires React</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Available Components</h2>
+            <div style="color: #475569; line-height: 1.8;">
+                <p><strong>AgentCard</strong> - Display detailed information about AI agents</p>
+                <p><strong>AgentList</strong> - Grid layout for multiple agents</p>
+                <p><strong>AgentChat</strong> - Interactive chat interface with agents</p>
+                <p><strong>AgentAvatar</strong> - Customizable avatars with status indicators</p>
+                <p><strong>AgentStatus</strong> - Visual status indicators for agent states</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Documentation</h2>
+            <p style="color: #475569;">For complete documentation, usage examples, and API reference, check the <a href="https://github.com/123qwe-asd-ux/xyzen-ui" style="color: #3b82f6;">GitHub repository</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
